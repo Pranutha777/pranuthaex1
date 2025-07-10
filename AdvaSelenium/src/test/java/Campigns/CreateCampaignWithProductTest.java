@@ -18,7 +18,7 @@ import Pom_Repo.ProductLooUpImg;
 import Pom_Repo.ValidateContactPage;
 import Pom_Repo.ValidationCampaignPage;
 import Pom_Repo.WindowSwitchingPage;
-
+@firstpush
 @Test
 public class CreateCampaignWithProductTest extends BaseClass
 {

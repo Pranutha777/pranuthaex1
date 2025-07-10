@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" parallel="tests" name="TestRunner2(failed)">
+    <parameter name="Username" value="Login"/>
+    <parameter name="browser" value="edge"/>
+    <parameter name="url" value="http://localhost:8888"/>
+    <parameter name="Password" value="Login"/>
+    <classes>
+      <class name="Contact.CreateContactTest">
+        <methods>
+          <include name="AC"/>
+          <include name="BT"/>
+          <include name="AS"/>
+          <include name="createContactTest"/>
+          <include name="BC"/>
+          <include name="BS"/>
+          <include name="AT"/>
+          <include name="createProductTest"/>
+          <include name="AM"/>
+          <include name="BM"/>
+        </methods>
+      </class> <!-- Contact.CreateContactTest -->
+    </classes>
+  </test> <!-- TestRunner2(failed) -->
+  <test thread-count="5" parallel="tests" name="TestRunner1(failed)">
+    <parameter name="Username" value="Login"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="http://localhost:8888"/>
+    <parameter name="Password" value="Login"/>
+    <classes>
+      <class name="campaigns.CampaignsCreateTest">
+        <methods>
+          <include name="AC"/>
+          <include name="BT"/>
+          <include name="AS"/>
+          <include name="BC"/>
+          <include name="BS"/>
+          <include name="AT"/>
+          <include name="createCampaignWithProductTest"/>
+          <include name="createCampaignsTest"/>
+          <include name="AM"/>
+          <include name="BM"/>
+        </methods>
+      </class> <!-- campaigns.CampaignsCreateTest -->
+    </classes>
+  </test> <!-- TestRunner1(failed) -->
+</suite> <!-- Failed suite [Suite] -->

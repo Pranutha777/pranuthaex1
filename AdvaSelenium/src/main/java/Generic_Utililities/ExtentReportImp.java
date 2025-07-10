@@ -1,0 +1,90 @@
+package Generic_Utililities;
+
+import java.util.Date;
+
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+
+public class ExtentReportImp implements ITestListener
+{
+	//Make this as Global variables
+	ExtentReports report;
+	ExtentTest test;
+	
+	//This method will start the exceution
+	@Override
+	public void onTestStart(ITestResult result) 
+	{
+		// TODO Auto-generated method stub
+		
+		test = report.createTest(result.getMethod().getMethodName());
+	}
+	
+	
+	//if above method is success it will return to this method.
+	@Override
+	public void onTestSuccess(ITestResult result) 
+	{
+		// TODO Auto-generated method stub
+		test.log(Status.PASS,result.getMethod().getMethodName());
+		test.log(Status.PASS,result.getThrowable());
+	}
+	
+	
+	//if onTestStart is failed it will return to this method
+	@Override
+	public void onTestFailure(ITestResult result) 
+	{
+		// TODO Auto-generated method stub
+		test.log(Status.FAIL,result.getMethod().getMethodName());
+		test.log(Status.FAIL,result.getThrowable());
+			
+			String screenShot=null;
+			
+			try {
+			screenShot = WebDriver_Utilities.takeSCreenShotEx(BaseClass.sdriver, result.getMethod().getMethodName());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			test.addScreenCaptureFromPath(screenShot);
+		}
+
+		public void onTestSkipped(ITestResult result) {
+			
+			test.log(Status.SKIP, result.getMethod().getMethodName());
+			test.log(Status.SKIP, result.getThrowable());
+		}
+
+		public void onStart(ITestContext context) {
+			
+			String dateAndTime = new Date().toString().replace(" ", "_").replace(":", "_");
+			
+			ExtentSparkReporter spark = new ExtentSparkReporter("ExtentReport/report.html"+dateAndTime);
+			spark.config().setTheme(Theme.DARK);
+			spark.config().setDocumentTitle("VtigerReport");
+			spark.config().setReportName("Shobha");
+			
+			//system configure
+			report=new ExtentReports();
+			report.attachReporter(spark);
+			report.setSystemInfo("platform", "windows");
+			report.setSystemInfo("executedBy", "SHOBHA");
+			report.setSystemInfo("reviwedBy", "Rathin");
+		
+		}
+
+		public void onFinish(ITestContext context) {
+			report.flush();
+			
+		}
+
+		
+		
+	}
